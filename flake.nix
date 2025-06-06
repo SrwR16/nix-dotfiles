@@ -2,7 +2,7 @@
   description = "kOS";
 
   inputs = {
-    nixpkgs.url = "nixpkgs/nixpkgs-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs";
 
     ollamark.url = "github:knoopx/ollamark";
@@ -57,8 +57,9 @@
     neuwaita.url = "github:RusticBard/Neuwaita";
     neuwaita.flake = false;
 
-    autofirma-nix.url = "github:nix-community/autofirma-nix";
-    autofirma-nix.inputs.nixpkgs.follows = "nixpkgs";
+    # Disabled autofirma-nix as it's not needed for Bangladesh users
+    # autofirma-nix.url = "github:nix-community/autofirma-nix";
+    # autofirma-nix.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = {
@@ -71,7 +72,7 @@
     vibeapps,
     ollamark,
     astal-shell,
-    autofirma-nix,
+    # autofirma-nix, # Disabled as not needed for Bangladesh users
     ...
   } @ inputs: let
     system = "x86_64-linux";
@@ -178,7 +179,7 @@
         users.${defaults.username} = import ./home/default.nix;
         sharedModules = [
           vibeapps.homeManagerModules.default
-          autofirma-nix.homeManagerModules.default
+          # autofirma-nix.homeManagerModules.default # Disabled
         ];
       };
     };
@@ -196,7 +197,7 @@
         users.${defaults.username} = import ./home/default.nix;
         sharedModules = [
           vibeapps.homeManagerModules.default
-          autofirma-nix.homeManagerModules.default
+          # autofirma-nix.homeManagerModules.default # Disabled
         ];
       };
     };
