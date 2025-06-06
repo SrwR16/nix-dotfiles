@@ -174,7 +174,10 @@
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        extraSpecialArgs = specialArgs;
+        extraSpecialArgs = specialArgs // {
+          # Pass the primary user's configuration
+          userConfig = userConfig.users.${userConfig.primaryUser};
+        };
         backupFileExtension = "bak";
         users.${defaults.username} = import ./home/default.nix;
         sharedModules = [
