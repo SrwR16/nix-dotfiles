@@ -57,10 +57,20 @@ in {
     @import "${theme}/theme/gnome-theme.css"
   '';
 
-  userContent = ''
+  userContent = let
+    cssVars = ''
+      :root {
+      ${
+        builtins.concatStringsSep "\n" (pkgs.lib.attrsets.mapAttrsToList (
+            name: value: "--${name}: #${toString value};"
+          )
+          defaults.colorScheme.palette)
+      }
+      }
+    '';
+  in ''
     @import "${theme}/theme/userContent.css";
-    ${builtins.readFile "${pkgs.theming.mkUserStyles defaults.colorScheme.palette}"}
-
+    ${cssVars}
   '';
 
   search = {
