@@ -1,7 +1,6 @@
 {pkgs, ...}: {
   hardware = {
     ksm.enable = true;
-    cpu.intel.updateMicrocode = true;
 
     bluetooth = {
       enable = false;

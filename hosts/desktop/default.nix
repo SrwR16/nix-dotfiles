@@ -4,8 +4,8 @@
 in {
   imports =
     [
+      ./hardware-configuration.nix
       ./boot.nix
-      ./filesystems.nix
       ./hardware.nix
       ./nvidia.nix
       ./services.nix
