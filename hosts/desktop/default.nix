@@ -13,7 +13,7 @@ in {
     ++ (listNixModulesRecusive ./containers)
     ++ (listNixModulesRecusive ../../modules/nixos);
 
-  networking.hostName = "desktop";
+  # hostname and stateVersion are set dynamically by flake.nix
   nix.settings.system-features = [
     "kvm"
     "big-parallel"
@@ -21,10 +21,6 @@ in {
     "gccarch-x86-64-v3"
     "gccarch-x86-64-v4"
   ];
-
-  system = {
-    stateVersion = "24.05";
-  };
 
   nixpkgs = {
     hostPlatform = {

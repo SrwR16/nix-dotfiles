@@ -6,6 +6,7 @@
   # System configuration
   system = {
     hostname = "X"; # Change this to your hostname (used for nixos-rebuild switch --flake .#HOSTNAME)
+    hostType = "desktop"; # Which host configuration to use (desktop, macbook, vm)
   };
 
   users = {

@@ -18,7 +18,7 @@ in {
     ]
     ++ (listNixModulesRecusive ../../modules/nixos);
 
-  networking.hostName = "macbook";
+  # hostname is set dynamically by flake.nix when using dynamic configuration
   nix.settings.system-features = [
     "kvm"
     "big-parallel"

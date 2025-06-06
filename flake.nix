@@ -78,7 +78,7 @@
     pkgs = nixpkgs.legacyPackages.${system};
 
     # Load user configuration
-    userConfig = import ./user-config.nix;
+    userConfig = import ./userConfig.nix;
 
     # Create defaults from user config for backwards compatibility
     defaults = let
@@ -174,7 +174,7 @@
         useUserPackages = true;
         extraSpecialArgs = specialArgs;
         backupFileExtension = "bak";
-        users.${defaults.username} = import ./home/${defaults.username}.nix;
+        users.${defaults.username} = import ./home/default.nix;
         sharedModules = [
           vibeapps.homeManagerModules.default
           autofirma-nix.homeManagerModules.default
@@ -182,14 +182,14 @@
       };
     };
 
-    # VM-specific home manager configuration (uses original knoopx config)
+    # VM-specific home manager configuration (uses default.nix with knoopx user)
     vmHomeManagerModule = {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
         extraSpecialArgs = specialArgs;
         backupFileExtension = "bak";
-        users.knoopx = import ./home/knoopx.nix;
+        users.knoopx = import ./home/default.nix;
         sharedModules = [
           vibeapps.homeManagerModules.default
           autofirma-nix.homeManagerModules.default
@@ -225,7 +225,7 @@
           ++ [
             home-manager.nixosModules.home-manager
             homeManagerModule
-            ./hosts/desktop  # Always use desktop host as base
+            ./hosts/${userConfig.system.hostType}  # Use dynamic host type
             {
               networking.hostName = userConfig.system.hostname;
               time.timeZone = userConfig.users.${userConfig.primaryUser}.system.timeZone;
@@ -267,7 +267,7 @@
               };
               modules = [
                 vibeapps.homeManagerModules.default
-                ./home/${userName}.nix
+                ./home/default.nix
               ];
             };
           }

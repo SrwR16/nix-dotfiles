@@ -1,8 +1,8 @@
-{userConfig, ...} @ inputs: let
+{userConfig ? null, defaults ? null, ...} @ inputs: let
   listNixModulesRecusive = import ../lib/listNixModulesRecusive.nix inputs;
 
-  # Create defaults from user configuration
-  defaults = {
+  # Create defaults from user configuration if provided, otherwise use system defaults
+  homeDefaults = if userConfig != null then {
     username = userConfig.name;
     password = userConfig.name;
     full-name = userConfig.fullName;
@@ -13,18 +13,18 @@
     defaultLocale = userConfig.system.locale.default;
     region = userConfig.system.locale.default;
     editor = "code"; # Default editor
-  };
+  } else defaults;
 in {
   imports = listNixModulesRecusive ../modules/home-manager;
 
   home = {
-    stateVersion = userConfig.system.stateVersion;
-    username = userConfig.name;
+    stateVersion = if userConfig != null then userConfig.system.stateVersion else "24.05";
+    username = if userConfig != null then userConfig.name else defaults.username;
   };
 
-  # Make defaults available to all modules
+  # Make defaults and gitKey available to all modules
   _module.args = {
-    inherit defaults;
-    gitKey = userConfig.gitKey or null;
+    defaults = homeDefaults;
+    gitKey = if userConfig != null then (userConfig.gitKey or null) else null;
   };
 }
