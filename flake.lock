@@ -861,11 +861,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749227129,
-        "narHash": "sha256-sdDjMQqdD1/Ba7HrMdwp+xTkb7RBAIILlee/8h1GN+0=",
+        "lastModified": 1749229045,
+        "narHash": "sha256-64+OS7V+uU6rssP20T1t+lcILDJWEVhXN7aF1oLTtII=",
         "owner": "SrwR16",
         "repo": "vibeapps",
-        "rev": "71c50b17552015eaabaff54e8ee5d132e38bdb0e",
+        "rev": "0ae03f6d68034bfc8160128d27a2b97b8f400f21",
         "type": "github"
       },
       "original": {
