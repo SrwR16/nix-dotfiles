@@ -1,9 +1,15 @@
-{defaults, ...}: {
+{defaults, gitKey ? null, ...}: {
   programs = {
     git = {
       enable = true;
       userName = defaults.full-name;
       userEmail = defaults.primary-email;
+
+      # GPG signing configuration
+      signing = if gitKey != null then {
+        key = gitKey;
+        signByDefault = true;
+      } else {};
 
       aliases = {
         d = "diff";
@@ -56,6 +62,10 @@
         remote.origin.prune = true;
         init.defaultBranch = "main";
         rerere.enabled = true;
+
+        # GPG configuration
+        commit.gpgsign = if gitKey != null then true else false;
+        tag.gpgsign = if gitKey != null then true else false;
 
         branch = {
           autosetupmerge = true;

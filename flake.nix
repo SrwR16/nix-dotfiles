@@ -76,7 +76,35 @@
   } @ inputs: let
     system = "x86_64-linux";
     pkgs = nixpkgs.legacyPackages.${system};
-    defaults = pkgs.callPackage ./defaults.nix inputs;
+
+    # Load user configuration
+    userConfig = import ./user-config.nix;
+
+    # Create defaults from user config for backwards compatibility
+    defaults = let
+      primaryUser = userConfig.users.${userConfig.primaryUser};
+      originalDefaults = pkgs.callPackage ./defaults.nix inputs;
+    in originalDefaults // {
+      # User information
+      username = userConfig.primaryUser;
+      full-name = primaryUser.fullName;
+      primary-email = primaryUser.email;
+      password = primaryUser.name;  # Use username as password
+
+      # System configuration
+      inherit (userConfig.system) hostname;
+      timeZone = primaryUser.system.timeZone;
+      defaultLocale = primaryUser.system.locale.default;
+      region = primaryUser.system.locale.default;
+      keyMap = primaryUser.system.keyMap;
+
+      # Additional user config
+      gitKey = primaryUser.gitKey or null;
+      avatar-image = primaryUser.avatar or originalDefaults.avatar-image;
+
+      # Keep original for backwards compatibility
+      userConfig = userConfig;
+    };
 
     specialArgs =
       (nixpkgs.lib.removeAttrs inputs ["self"])
@@ -137,27 +165,45 @@
           }));
       }
       stylix.nixosModules.stylix
-      home-manager.nixosModules.home-manager
-      {
-        home-manager = {
-          useGlobalPkgs = true;
-          useUserPackages = true;
-          extraSpecialArgs = specialArgs;
-          backupFileExtension = "bak";
-          users.${defaults.username} = import ./home/${defaults.username}.nix;
-          sharedModules = [
-            vibeapps.homeManagerModules.default
-            autofirma-nix.homeManagerModules.default
-          ];
-        };
-      }
     ];
+
+    # Home manager configuration for regular systems
+    homeManagerModule = {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        extraSpecialArgs = specialArgs;
+        backupFileExtension = "bak";
+        users.${defaults.username} = import ./home/${defaults.username}.nix;
+        sharedModules = [
+          vibeapps.homeManagerModules.default
+          autofirma-nix.homeManagerModules.default
+        ];
+      };
+    };
+
+    # VM-specific home manager configuration (uses original knoopx config)
+    vmHomeManagerModule = {
+      home-manager = {
+        useGlobalPkgs = true;
+        useUserPackages = true;
+        extraSpecialArgs = specialArgs;
+        backupFileExtension = "bak";
+        users.knoopx = import ./home/knoopx.nix;
+        sharedModules = [
+          vibeapps.homeManagerModules.default
+          autofirma-nix.homeManagerModules.default
+        ];
+      };
+    };
 
     vmConfiguration = nixpkgs.lib.nixosSystem {
       inherit specialArgs;
       modules =
         nixosModules
         ++ [
+          home-manager.nixosModules.home-manager
+          vmHomeManagerModule
           ./hosts/vm
         ];
     };
@@ -171,34 +217,61 @@
     nixosConfigurations = {
       vm = vmConfiguration;
 
-      desktop = nixpkgs.lib.nixosSystem {
+      # Dynamic configuration based on user-config.nix
+      ${userConfig.system.hostname} = nixpkgs.lib.nixosSystem {
         inherit specialArgs;
         modules =
           nixosModules
           ++ [
-            ./hosts/desktop
+            home-manager.nixosModules.home-manager
+            homeManagerModule
+            ./hosts/desktop  # Always use desktop host as base
+            {
+              networking.hostName = userConfig.system.hostname;
+              time.timeZone = userConfig.users.${userConfig.primaryUser}.system.timeZone;
+              i18n.defaultLocale = userConfig.users.${userConfig.primaryUser}.system.locale.default;
+              i18n.extraLocaleSettings = userConfig.users.${userConfig.primaryUser}.system.locale.extra;
+              console.keyMap = userConfig.users.${userConfig.primaryUser}.system.keyMap;
+              system.stateVersion = userConfig.users.${userConfig.primaryUser}.system.stateVersion;
+            }
           ];
       };
 
+      # Keep existing configurations for backwards compatibility
       macbook = nixpkgs.lib.nixosSystem {
         inherit specialArgs;
         modules =
           nixosModules
           ++ [
+            home-manager.nixosModules.home-manager
+            homeManagerModule
             ./hosts/macbook
           ];
       };
     };
 
-    homeConfigurations = {
-      "${defaults.username}" = home-manager.lib.homeManagerConfiguration {
-        inherit pkgs;
-        extraSpecialArgs = specialArgs;
-        modules = [
-          vibeapps.homeManagerModules.default
-          ./home/knoopx
-        ];
-      };
-    };
+    homeConfigurations =
+      # Generate dynamic home configurations for each user
+      builtins.listToAttrs (
+        builtins.map (userName:
+          let
+            user = userConfig.users.${userName};
+            configName = "${userName}@${userConfig.system.hostname}";
+          in {
+            name = configName;
+            value = home-manager.lib.homeManagerConfiguration {
+              inherit pkgs;
+              extraSpecialArgs = specialArgs // {
+                userConfig = user;
+                inherit (user) name email fullName gitKey avatar;
+              };
+              modules = [
+                vibeapps.homeManagerModules.default
+                ./home/${userName}.nix
+              ];
+            };
+          }
+        ) (builtins.attrNames userConfig.users)
+      );
   };
 }
