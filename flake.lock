@@ -648,15 +648,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1748470782,
-        "narHash": "sha256-/GTfan4rUTr5t+6rHCiCGIXcdZpsTDHbKGSb3InksmA=",
-        "owner": "knoopx",
+        "lastModified": 1749226417,
+        "narHash": "sha256-IrkYjaA5qpB3nB6gPZdra2r0NUkIaJjnv7BsuizyEhM=",
+        "owner": "SrwR16",
         "repo": "ollamark",
-        "rev": "36cd394793a7ea7d2799c3bb3edc7fdcd5ede248",
+        "rev": "40b0bcd24036b0114c1708dfa902357205655025",
         "type": "github"
       },
       "original": {
-        "owner": "knoopx",
+        "owner": "SrwR16",
         "repo": "ollamark",
         "type": "github"
       }
@@ -861,15 +861,15 @@
         ]
       },
       "locked": {
-        "lastModified": 1749114916,
-        "narHash": "sha256-5FEC1rQSJpLN6fjJiZxXCcYxAqGEUhR3BBwr2k64H5o=",
-        "owner": "knoopx",
+        "lastModified": 1749226337,
+        "narHash": "sha256-GLK8t7Zk/n9Jh3ylAOmeUu7uyyb6Xd0/aKtFmLchrw0=",
+        "owner": "SrwR16",
         "repo": "vibeapps",
-        "rev": "da4812a297a6c3bb8439dc80da2675980d4c02ac",
+        "rev": "b29c2cf7e555da7a0ab12af69d21112a9620adae",
         "type": "github"
       },
       "original": {
-        "owner": "knoopx",
+        "owner": "SrwR16",
         "repo": "vibeapps",
         "type": "github"
       }
