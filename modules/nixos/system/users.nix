@@ -30,9 +30,8 @@
       "ydotool"
     ];
 
-    openssh.authorizedKeys.keys = let
-      authorizedKeys = pkgs.fetchurl defaults.pubKeys;
-    in
-      pkgs.lib.splitString "\n" (builtins.readFile authorizedKeys);
+    openssh.authorizedKeys.keyFiles = [
+      (pkgs.fetchurl defaults.pubKeys)
+    ];
   };
 }

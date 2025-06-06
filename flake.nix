@@ -111,6 +111,7 @@
       // {
         inherit inputs;
         inherit defaults;
+        inherit userConfig;
       };
 
     haumeaInputs = prev:
@@ -182,14 +183,17 @@
       };
     };
 
-    # VM-specific home manager configuration (uses default.nix with knoopx user)
+    # VM-specific home manager configuration (uses same dynamic approach as main system)
     vmHomeManagerModule = {
       home-manager = {
         useGlobalPkgs = true;
         useUserPackages = true;
-        extraSpecialArgs = specialArgs;
+        extraSpecialArgs = specialArgs // {
+          # For VM, use the primary user's configuration
+          userConfig = userConfig.users.${userConfig.primaryUser};
+        };
         backupFileExtension = "bak";
-        users.knoopx = import ./home/default.nix;
+        users.${defaults.username} = import ./home/default.nix;
         sharedModules = [
           vibeapps.homeManagerModules.default
           autofirma-nix.homeManagerModules.default
