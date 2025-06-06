@@ -648,11 +648,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749226417,
-        "narHash": "sha256-IrkYjaA5qpB3nB6gPZdra2r0NUkIaJjnv7BsuizyEhM=",
+        "lastModified": 1749227619,
+        "narHash": "sha256-sQ9cvZ2rscfDDi5Id4doIdYAC4tIFai5UYsYAesL0Jc=",
         "owner": "SrwR16",
         "repo": "ollamark",
-        "rev": "40b0bcd24036b0114c1708dfa902357205655025",
+        "rev": "bfb3b1465fd425cf509d0b25502d5748335d049f",
         "type": "github"
       },
       "original": {
