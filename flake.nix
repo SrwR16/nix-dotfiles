@@ -5,10 +5,10 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     # nixpkgs.url = "github:nixos/nixpkgs";
 
-    ollamark.url = "github:knoopx/ollamark";
+    ollamark.url = "github:SrwR16/ollamark";
     ollamark.inputs.nixpkgs.follows = "nixpkgs";
 
-    vibeapps.url = "github:knoopx/vibeapps";
+    vibeapps.url = "github:SrwR16/vibeapps";
     vibeapps.inputs.nixpkgs.follows = "nixpkgs";
 
     haumea.url = "github:nix-community/haumea";
