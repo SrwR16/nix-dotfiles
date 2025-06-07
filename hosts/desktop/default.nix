@@ -7,7 +7,7 @@ in {
       ./hardware-configuration.nix
       ./boot.nix
       ./hardware.nix
-      ./nvidia.nix
+      # ./nvidia.nix  # Commented out for Intel graphics - uncomment for NVIDIA
       ./services.nix
     ]
     ++ (listNixModulesRecusive ./containers)
@@ -27,7 +27,7 @@ in {
       inherit system;
     };
     config = {
-      cudaSupport = true;
+      # cudaSupport = true;  # Commented out for Intel graphics - uncomment for NVIDIA
     };
   };
 }
