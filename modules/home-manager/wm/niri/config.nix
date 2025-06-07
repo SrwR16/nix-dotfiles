@@ -42,7 +42,7 @@
     # Output configuration
     outputs."DP-1" = {
       scale = 2.0;
-      background-color = "#${defaults.colorScheme.palette.base02}";
+      # background-color = "#${defaults.colorScheme.palette.base02}"; # Handled by Stylix
     };
 
     # Screenshot path
