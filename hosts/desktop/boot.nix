@@ -1,4 +1,4 @@
-{pkgs, ...}: {
+{pkgs, lib, ...}: {
   # chaotic.scx.enable = true;
   # chaotic.scx.scheduler = "scx_simple";
 

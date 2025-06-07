@@ -8,7 +8,7 @@
     autoEnable = true;
     polarity = "dark";
     base16Scheme = defaults.colorScheme;
-    image = ../../files/wallpaper/wallpaper1.jpg;
+    image = ../../../files/wallpaper/wallpaper1.jpg;
     fonts = defaults.fonts;
     cursor = {
       package = pkgs.quintom-cursor-theme;
