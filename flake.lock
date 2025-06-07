@@ -474,11 +474,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749221014,
-        "narHash": "sha256-mqrpuP/lfyDmta5hJWTwWgdF5lwdiubcGs7oRvcTZ2s=",
+        "lastModified": 1749243446,
+        "narHash": "sha256-P1gumhZN5N9q+39ndePHYrtwOwY1cGx+VoXGl+vTm7A=",
         "owner": "nix-community",
         "repo": "home-manager",
-        "rev": "96482a538e6103579d254b139759d0536177370b",
+        "rev": "2d7d65f65b61fdfce23278e59ca266ddd0ef0a36",
         "type": "github"
       },
       "original": {
@@ -584,11 +584,11 @@
     },
     "nixpkgs": {
       "locked": {
-        "lastModified": 1749174413,
-        "narHash": "sha256-urN9UMK5cd1dzhR+Lx0xHeTgBp2MatA5+6g9JaxjuQs=",
+        "lastModified": 1749213349,
+        "narHash": "sha256-UAaWOyQhdp7nXzsbmLVC67fo+QetzoTm9hsPf9X3yr4=",
         "owner": "nixos",
         "repo": "nixpkgs",
-        "rev": "6ad174a6dc07c7742fc64005265addf87ad08615",
+        "rev": "a4ff0e3c64846abea89662bfbacf037ef4b34207",
         "type": "github"
       },
       "original": {
@@ -648,11 +648,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749227619,
-        "narHash": "sha256-sQ9cvZ2rscfDDi5Id4doIdYAC4tIFai5UYsYAesL0Jc=",
+        "lastModified": 1749231994,
+        "narHash": "sha256-t8yzglporyTQ026PVtrN195pnACRghcD8I5Z4UfxYEc=",
         "owner": "SrwR16",
         "repo": "ollamark",
-        "rev": "bfb3b1465fd425cf509d0b25502d5748335d049f",
+        "rev": "a4acba6d9f4a1d9b1d812da536bbe4951f3f58bb",
         "type": "github"
       },
       "original": {
@@ -708,11 +708,11 @@
         "tinted-zed": "tinted-zed"
       },
       "locked": {
-        "lastModified": 1749165619,
-        "narHash": "sha256-E1KgTswgmzBGv+8WijQRghlyIP6k+LPzj9j8bq9BlLU=",
+        "lastModified": 1749236315,
+        "narHash": "sha256-Ndtdvwz8D4WOYHl5mj9d5F5iC8WPH6uPNF7RcU3QzmE=",
         "owner": "nix-community",
         "repo": "stylix",
-        "rev": "8456dfa7f60e6b4499b0498fc88e9b8b57d4d7d7",
+        "rev": "29d006198ee05143cca8b4b89f37025823da1bcc",
         "type": "github"
       },
       "original": {
@@ -861,11 +861,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1749229045,
-        "narHash": "sha256-64+OS7V+uU6rssP20T1t+lcILDJWEVhXN7aF1oLTtII=",
+        "lastModified": 1749231631,
+        "narHash": "sha256-mesxhxEy+/qb7ukehJEVu36OKNsiEQuyC8aHgQ+/D24=",
         "owner": "SrwR16",
         "repo": "vibeapps",
-        "rev": "0ae03f6d68034bfc8160128d27a2b97b8f400f21",
+        "rev": "be4601ded5f532725b54a198e7c851fc1d263114",
         "type": "github"
       },
       "original": {
